@@ -2,10 +2,4 @@
 /node_modules/*
 *._*
 .DS_Store
-/MEANedx/data/*
-Full stack development/Course5/mongodb/data/*
 *.pdf
-/CampuSale/
-/jayantarora/
-/Student Mentorship Guild/
-/C++/*.pdf
