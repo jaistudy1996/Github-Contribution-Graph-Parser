@@ -21,12 +21,10 @@ router.get('/', function(req, res, next) {
 		});
 		var parser = new htmlParser.Parser(handler);
 		parser.parseComplete(body);
-		console.log(handler);
-		console.log("============");
-		console.log(parser);
+		console.log(handler.dom[0].children[1].children[1].children[1]);
 		// console.log(body);
+		res.render('index', { title: 'Express', data: handler.dom[0].children[1].children[1]});
 	});
-  res.render('index', { title: 'Express' });
 });
 
 module.exports = router;
