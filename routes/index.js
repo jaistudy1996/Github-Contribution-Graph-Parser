@@ -1,8 +1,9 @@
 var express = require('express');
 var request = require('request');
 var router = express.Router();
-var htmlParser = require('htmlparser');
+var jsdom = require('jsdom');
 
+const { JSDOM } = jsdom;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,20 +11,19 @@ router.get('/', function(req, res, next) {
 		if(error){
 			console.log(error);
 		}
-		// console.log(response);
-		var handler = new htmlParser.DefaultHandler(function(error, dom){
-			if(error){
-				console.log(error);
-			}
-			else{
-				return dom;
-			}
-		});
-		var parser = new htmlParser.Parser(handler);
-		parser.parseComplete(body);
-		console.log(handler.dom[0].children[1].children[1].children[1]);
+		const dom = new JSDOM(body, { includeNodeLocations: true });
 		// console.log(body);
-		res.render('index', { title: 'Express', data: handler.dom[0].children[1].children[1]});
+		for(var i=0; i<53; i++){
+			for(var j=0; j<7; j++){
+				try{
+					console.log(i, dom.window.document.querySelector('svg').children[0].children[i].children[j]);
+				}
+				catch(error){
+					console.log(error);
+				}
+			}
+		}
+		res.render('index', { title: 'Express', data: 'hello'});
 	});
 });
 
